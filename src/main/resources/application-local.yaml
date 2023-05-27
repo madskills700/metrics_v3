@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    postgres:
+      url: jdbc:postgresql://localhost:15432/metrics
+      username: postgres
+      password: password
+    clickhouse:
+      url: jdbc:clickhouse://localhost:18123/metrics
+      username: user
+      password: password
+      database: metrics
+springdoc:
+  packages-to-scan: ch.madskills
+  show-actuator: true
+  default-produces-media-type: application/json
+  swagger-ui:
+    enabled: true
+    tags-sorter: alpha
+    operations-sorter: alpha

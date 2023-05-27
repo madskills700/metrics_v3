@@ -1,0 +1,41 @@
+server:
+  servlet:
+    context-path: /ch/madskills/
+  port: 8080
+spring:
+  application:
+    name: metrics-service
+  profiles:
+    active: local
+  datasource:
+    postgres:
+      driver-class-name: org.postgresql.Driver
+      hikari:
+        schema: dev
+      liquibase:
+        schema: dev
+        change-log: classpath:/db/changelog/db.changelog-master-postgresql.yaml
+    clickhouse:
+      driver-class-name: com.clickhouse.jdbc.ClickHouseDriver
+      hikari:
+        minimumIdle: 5
+        maximumIdle: 15
+        idleTimeout: 10000
+        connectionTimeout: 45000
+        maxLifeTime: 48000
+        leakDetectionThreshold: 360000
+      liquibase:
+        change-log: classpath:/db/changelog/db.changelog-master-clickhouse.yaml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, loggers, prometheus
+  endpoint:
+    loggers.enabled: true
+    metrics.enabled: true
+    health:
+      show-details: always
+      probes.enabled: true
+  metrics.export.prometheus.enabled: true

@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - property:
+      name: now_millis
+      value: (extract(epoch from now()) * 1000)::bigint
+      dbms: postgresql
+  - includeAll:
+      path: db/changelog/init-postgres/
